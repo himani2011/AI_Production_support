@@ -1,0 +1,12 @@
+Database Troubleshooting Guide
+
+Common symptoms:
+- Database connection errors.
+- Slow application responses.
+- Queries failing or taking too long.
+
+Recommended actions:
+- Verify the database connection.
+- Review slow queries.
+- Check for database locks.
+- Confirm that the database file is accessible.

@@ -1,0 +1,17 @@
+Payment Gateway Timeout
+
+Symptoms:
+- Customers cannot complete payment.
+- Orders may remain in Pending status.
+- Repeated timeout messages appear in application logs.
+
+Possible causes:
+- The external payment provider is unavailable.
+- Network communication with the provider failed.
+- The payment request exceeded its timeout limit.
+
+Recommended actions:
+- Check the payment provider's service status.
+- Retry the payment request.
+- Review pending orders before retrying payment.
+- Escalate to the payment provider if failures continue.

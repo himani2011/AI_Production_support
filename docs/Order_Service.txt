@@ -1,0 +1,10 @@
+Order Service Process
+
+1. Validate the customer.
+2. Validate the product.
+3. Check available stock.
+4. Process payment.
+5. Create or update the order.
+6. Confirm the order.
+
+If payment fails, the order may remain Pending until the issue is reviewed.
