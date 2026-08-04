@@ -1,42 +1,25 @@
-# AI Production Support Assistant
+AI Production Support Assistant
 
-An AI-powered production support system that investigates software incidents using application logs, database queries, and technical documentation.
+An AI-powered production support platform that automates software incident investigation by combining application logs, structured operational data, and technical documentation.
 
----
+The project simulates a production e-commerce environment where AI assists support engineers in identifying software failures, investigating database state, and generating Root Cause Analysis (RCA) reports with actionable recommendations.
 
-## 🚀 Technologies
+Current Features
 
-- Python
-- Flask
-- SQLAlchemy
-- SQLite
-- OpenAI API *(coming soon)*
-- LangChain *(planned)*
-- ChromaDB *(planned)*
+Flask REST API backend
+SQLite database with SQLAlchemy ORM
+Order processing simulation
+Application logging
+Incident investigation engine
+AI-generated RCA reports using Gemini API
+Modular project architecture
+Roadmap
 
----
-
-## Current Features
-
-- Flask REST API
-- SQLite database
-- Customer, Product, and Order models
-- Seed data generation
-- Modular project structure
-
----
-
-## Planned Features
-
-- AI Log Analysis
-- Root Cause Analysis
-- Documentation Search (RAG)
-- SQL Investigation
-- Incident Reports
-- Confidence Scoring
-
----
-
-## Project Status
-
-🚧 Under Active Development
+Retrieval-Augmented Generation (RAG)
+ChromaDB vector search
+LangGraph agent orchestration
+Multi-agent investigation workflow
+Confidence scoring
+Human feedback loop
+Docker deployment
+Automated testing
