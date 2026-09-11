@@ -5,7 +5,6 @@ from ecommerce.database import SessionLocal
 from ecommerce.logger import logger
 from ecommerce.models import Customer, Order, Product
 from ai.investigator import run_investigation
-# from ai.llm_investigator import generate_ai_report
 from ai.gemini_investigator import generate_ai_report
 
 api = Blueprint("api", __name__)
@@ -249,62 +248,97 @@ def create_order():
 def investigate_incident():
     try:
         logger.info("Incident investigation started")
-
         report = run_investigation()
-
         logger.info(
-            "Incident investigation completed with confidence=%s",
-            report["confidence_score"],
+            "Incident investigation completed: %s pending orders, $%s at risk",
+            report["evidence"]["pending_order_count"],
+            report["evidence"]["revenue_at_risk"],
         )
-
         return jsonify(report), 200
-
     except Exception as error:
-        logger.exception(
-            "Incident investigation failed: %s",
-            error,
-        )
+        logger.exception("Incident investigation failed: %s", error)
+        return jsonify({"error": "Incident investigation failed"}), 500
 
-        return jsonify(
-            {
-                "error": "Incident investigation failed",
-            }
-        ), 500
+
 @api.route("/investigate/ai", methods=["POST"])
 def investigate_incident_with_ai():
     try:
         logger.info("AI incident investigation started")
-
         report = generate_ai_report()
-
-        logger.info("AI incident investigation completed")
-
-        return jsonify(
-            {
-                "report": report,
-            }
-        ), 200
-
+        logger.info(
+            "AI incident investigation completed: confidence=%s severity=%s",
+            report["confidence_score"],
+            report["impact_severity"],
+        )
+        return jsonify(report), 200
     except ValueError as error:
-        logger.error(
-            "AI configuration error: %s",
-            error,
-        )
-
-        return jsonify(
-            {
-                "error": str(error),
-            }
-        ), 500
-
+        logger.error("AI configuration error: %s", error)
+        return jsonify({"error": str(error)}), 500
     except Exception as error:
-        logger.exception(
-            "AI incident investigation failed: %s",
-            error,
-        )
+        logger.exception("AI incident investigation failed: %s", error)
+        return jsonify({"error": "AI incident investigation failed"}), 500
 
-        return jsonify(
-            {
-                "error": "AI incident investigation failed",
-            }
-        ), 500
+
+# @api.route("/investigate", methods=["POST"])
+# def investigate_incident():
+#     try:
+#         logger.info("Incident investigation started")
+
+#         report = run_investigation()
+
+#         logger.info(
+#             "Incident investigation completed with confidence=%s",
+#             report["confidence_score"],
+#         )
+
+#         return jsonify(report), 200
+
+#     except Exception as error:
+#         logger.exception(
+#             "Incident investigation failed: %s",
+#             error,
+#         )
+
+#         return jsonify(
+#             {
+#                 "error": "Incident investigation failed",
+#             }
+#         ), 500
+# @api.route("/investigate/ai", methods=["POST"])
+# def investigate_incident_with_ai():
+#     try:
+#         logger.info("AI incident investigation started")
+
+#         report = generate_ai_report()
+
+#         logger.info("AI incident investigation completed")
+
+#         return jsonify(
+#             {
+#                 "report": report,
+#             }
+#         ), 200
+
+#     except ValueError as error:
+#         logger.error(
+#             "AI configuration error: %s",
+#             error,
+#         )
+
+#         return jsonify(
+#             {
+#                 "error": str(error),
+#             }
+#         ), 500
+
+#     except Exception as error:
+#         logger.exception(
+#             "AI incident investigation failed: %s",
+#             error,
+#         )
+
+#         return jsonify(
+#             {
+#                 "error": "AI incident investigation failed",
+#             }
+#         ), 500
